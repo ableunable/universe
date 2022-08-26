@@ -7,7 +7,7 @@ class StarType:
     def __init__(self, name, color, temperature, life=False, chance=(0,40)):
         self.name = name #Ime vrste // string
         self.color = color #Boja zvijezde // tuple(R,G,B)
-        self.temperature = temperature #Temperatura planeta u celsiusu // tuple(od, do)
+        self.temperature = temperature #Temp. planeta u °C // tuple(od, do)
         self.life = life #Dal planete mogu imati zivot // True False
         self.chance = chance
 
@@ -39,6 +39,7 @@ class Planet:
         else:
             self.ring = 0
 
+        #napraviti da su planete blize zvijezdi toplije nego one dalje
         self.temperature = random.randint(*self.startemp)
         self.gasses = 0
         self.minerals = 0
@@ -67,7 +68,7 @@ class Planet:
             self.resources = 0.0
             self.water = 0.0
 
-        final = 1.0 / (self.gasses + self.minerals + self.resources + self.water)
+        final = 1 / (self.gasses + self.minerals + self.resources + self.water)
         self.gasses *= final * 100
         self.minerals *= final * 100
         self.resources *= final * 100
@@ -109,7 +110,8 @@ class Star:
         self.color = self.type.color
         self.radius = random.randint(5, 22)
 
-        #Ako mi treba samo da prikaze zvijezdu ne mora onda generisati sve planete i detalje o njoj
+        #Ako mi treba samo da prikaze zvijezdu ne mora onda
+        #generisati sve planete i detalje o njoj
         #nego samo izgled
         if not generateSystem: 
             return
