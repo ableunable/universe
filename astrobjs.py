@@ -14,7 +14,7 @@ class StarType:
 #ovdje dodavaj vrste zvijezda
 star_types = [
     StarType("Gentle", GENTLE, (10,40), life=True),
-    StarType("Yellow Dwarf", YELLOW, (-224, 465), life=True),
+    StarType("Yellow Dwarf", YELLOW, (-224, 465), life=True), #bazirana na Suncu
     StarType("Superheated", SUPERHEATED, (150, 450)), #pakao
     StarType("Frozen", FROZEN, (-300, -100)),
     StarType("Radioactive", RADIOACTIVE, (30,70), life=True),
