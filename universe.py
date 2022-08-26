@@ -125,11 +125,11 @@ while running:
 
 	for x in range(SECTORS_X):
 		for y in range(SECTORS_Y):
-			#pygame.draw.rect(
-			# win,
-			# WHITE,
-			# (x*SEGMENTS,y*SEGMENTS,SEGMENTS,SEGMENTS),
-			# 1
+			# pygame.draw.rect(
+			# 	win,
+			# 	WHITE,
+			# 	(x*SEGMENTS,y*SEGMENTS,SEGMENTS,SEGMENTS),
+			# 	1
 			# )
 			star = Star(x + cam.x, y + cam.y, False)
 			if star.starExists:
