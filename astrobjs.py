@@ -24,9 +24,12 @@ star_types = [
 ]
 
 class Planet:
-    def __init__(self, startemp, starlife):
-        self.startemp = startemp
+    def __init__(self, startemp, starlife, stardist, planets):
+        self.startempmin, self.startempmax = startemp
+        self.startemprange = self.startempmax - self.startempmin
         self.starlife = starlife
+        self.stardist = stardist + 1
+        self.percent = 1 / self.stardist*(100/planets)
 
         self.name = planet_namer()
         self.radius = random.randint(5,12)
@@ -40,7 +43,7 @@ class Planet:
             self.ring = 0
 
         #napraviti da su planete blize zvijezdi toplije nego one dalje
-        self.temperature = random.randint(*self.startemp)
+        self.temperature = random.randint(self.startempmin, self.startempmax)
         self.gasses = 0
         self.minerals = 0
         self.resources = 0
@@ -126,6 +129,6 @@ class Star:
         else:
             self.planet_max = 6
         n_planets = random.randint(0, self.planet_max)
-        for _ in range(n_planets):
-            p = Planet(self.type.temperature, self.type.life)
+        for i in range(n_planets):
+            p = Planet(self.type.temperature, self.type.life, i, n_planets)
             self.planets.append(p)
