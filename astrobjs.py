@@ -29,11 +29,22 @@ class Planet:
         self.startemprange = self.startempmax - self.startempmin
         self.starlife = starlife
         self.stardist = stardist + 1
-        self.percent = 1 / self.stardist*(100/planets)
+
+        if self.stardist == 1:
+            self.percentmin = 0
+        else:
+            self.percentmin = ((self.stardist-1)*(100/planets))
+        if self.stardist == planets:
+            self.percentmax = 100
+        else:
+            self.percentmax = (self.stardist*(100/planets))
+
+        self.tempmin = self.startempmin * self.percentmin//100
+        self.tempmax = self.startempmax * self.percentmax//100
 
         self.name = planet_namer()
         self.radius = random.randint(5,12)
-        self.t = random.randint(0,360)
+        self.t = random.randint(0,360) #pocetna lokacija oko zvijezde
         self.reversedRotation = random.randint(0,150)==1
 
         self.moons = self.moongen()
@@ -43,7 +54,7 @@ class Planet:
             self.ring = 0
 
         #napraviti da su planete blize zvijezdi toplije nego one dalje
-        self.temperature = random.randint(self.startempmin, self.startempmax)
+        self.temperature = random.randint(self.tempmin, self.tempmax)
         self.gasses = 0
         self.minerals = 0
         self.resources = 0
@@ -95,7 +106,7 @@ class Planet:
         nMoons = random.randint(-5, 3)
         moons = []
         for _ in range(nMoons):
-            t = random.randint(0,360)
+            t = random.randint(0,360) #pocetna lokacija oko planete
             reversedRotation = random.randint(0,20)==1
             moons.append([t, reversedRotation])
 
