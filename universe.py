@@ -241,8 +241,22 @@ while running:
 				1
 			)
 
+			if planet.ring:
+				for ring in range(planet.rings):
+					ring_radius = planet.radius + 10
+					pygame.draw.circle(
+						win, 
+						GRAY, 
+						(int(planet_x), int(planet_y)), 
+						ring_radius, 
+						4
+					)
+
 			if planet.moons:
-				moon_orbit = planet.radius + 10
+				if planet.ring:
+					moon_orbit = ring_radius + 10
+				else:
+					moon_orbit = planet.radius + 10
 				for n, (t, reversedRotation) in enumerate(planet.moons):
 					n += 1 #da ne bi bilo dijeljenja sa 0
 					t += -time.time()/n if reversedRotation else time.time()/n
@@ -263,15 +277,6 @@ while running:
 						moon_size
 					)
 					moon_orbit += 10
-			elif planet.ring:
-				ring_radius = planet.radius + 10
-				pygame.draw.circle(
-					win, 
-					WHITE, 
-					(int(planet_x), int(planet_y)), 
-					ring_radius, 
-					4
-				)
 
 			if selected:
 				if (mos_x - rel_x_center)**2 +\

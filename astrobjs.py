@@ -48,17 +48,17 @@ class Planet:
         self.reversedRotation = random.randint(0,150)==1
 
         self.moons = self.moongen()
-        if not self.moons:
-            self.ring = random.randint(0,10) == 1
-        else:
-            self.ring = 0
-
+        
+        self.ring = random.randint(0,10) == 1
+        self.rings = random.randint(0,3)
+        
         #zbog zaledjenih zvijezda
         if self.tempmin < self.tempmax:
             self.temperature = random.randint(self.tempmin, self.tempmax)
             if self.startempmin < 0:
                 #da fixa temperaturu ako je minimum ranga zvijezde u minusu
                 self.temperature += self.startempmin
+                #treba jos doraditi ovo
         else:
             self.temperature = random.randint(self.tempmax, self.tempmin)
 
