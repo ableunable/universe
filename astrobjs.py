@@ -47,8 +47,6 @@ class Planet:
         self.t = random.randint(0,360) #pocetna lokacija oko zvijezde
         self.reversedRotation = random.randint(0,150)==1
 
-        print(self.name,self.tempmin,self.tempmax)
-
         self.moons = self.moongen()
         if not self.moons:
             self.ring = random.randint(0,10) == 1
