@@ -31,21 +31,23 @@ class Planet:
         self.stardist = stardist + 1
 
         if self.stardist == 1:
-            self.percentmin = 0
+            self.percentmin = 100
         else:
-            self.percentmin = ((self.stardist-1)*(100/planets))
+            self.percentmin = 100-((self.stardist-1)*(100/planets))
         if self.stardist == planets:
-            self.percentmax = 100
+            self.percentmax = 0
         else:
-            self.percentmax = (self.stardist*(100/planets))
+            self.percentmax = 100-(self.stardist*(100/planets))
 
-        self.tempmin = self.startempmin * self.percentmin//100
-        self.tempmax = self.startempmax * self.percentmax//100
+        self.tempmin = (self.startemprange * self.percentmin)//100
+        self.tempmax = (self.startemprange * self.percentmax)//100
 
         self.name = planet_namer()
         self.radius = random.randint(5,12)
         self.t = random.randint(0,360) #pocetna lokacija oko zvijezde
         self.reversedRotation = random.randint(0,150)==1
+
+        print(self.name,self.tempmin,self.tempmax)
 
         self.moons = self.moongen()
         if not self.moons:
@@ -53,8 +55,14 @@ class Planet:
         else:
             self.ring = 0
 
-        #napraviti da su planete blize zvijezdi toplije nego one dalje
-        self.temperature = random.randint(self.tempmin, self.tempmax)
+        #zbog zaledjenih zvijezda
+        if self.tempmin < self.tempmax:
+            self.temperature = random.randint(self.tempmin, self.tempmax)+\
+                self.startempmin
+        else:
+            self.temperature = random.randint(self.tempmax, self.tempmin)+\
+                self.startempmin
+
         self.gasses = 0
         self.minerals = 0
         self.resources = 0
@@ -68,10 +76,10 @@ class Planet:
             self.gas_giant = 0
 
         if not self.gas_giant:
-            if self.temperature > 0 and self.temperature < 100:
+            if self.temperature > -50 and self.temperature < 100:
                 self.hasWater = random.randint(0,50) == 1
-                if self.hasWater and self.starlife:
-                    self.life = random.randint(0,10) == 1
+            if self.temperature > 0 and self.hasWater and self.starlife:
+                self.life = random.randint(0,10) == 1
             self.gasses = random.random()
             self.minerals = random.random()
             self.resources = random.random()
@@ -94,7 +102,10 @@ class Planet:
         
     def colorize(self):
         if self.water and not self.life:
-            return BLUE
+            if self.temperature > 0:
+                return BLUE
+            else:
+                return FROZEN
         elif self.life:
             return GREEN
         elif self.gas_giant:
