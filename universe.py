@@ -242,19 +242,20 @@ while running:
 			)
 
 			if planet.ring:
+				ring_radius = planet.radius + 10
 				for ring in range(planet.rings):
-					ring_radius = planet.radius + 10
 					pygame.draw.circle(
 						win, 
 						GRAY, 
 						(int(planet_x), int(planet_y)), 
 						ring_radius, 
-						4
+						3
 					)
+					ring_radius += 6
 
 			if planet.moons:
 				if planet.ring:
-					moon_orbit = ring_radius + 10
+					moon_orbit = ring_radius + 6
 				else:
 					moon_orbit = planet.radius + 10
 				for n, (t, reversedRotation) in enumerate(planet.moons):
