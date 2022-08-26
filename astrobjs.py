@@ -55,12 +55,9 @@ class Planet:
         #zbog zaledjenih zvijezda
         if self.tempmin < self.tempmax:
             self.temperature = random.randint(self.tempmin, self.tempmax)
-            if self.startempmin < 0:
-                #da fixa temperaturu ako je minimum ranga zvijezde u minusu
-                self.temperature += self.startempmin
-                #treba jos doraditi ovo
         else:
             self.temperature = random.randint(self.tempmax, self.tempmin)
+        self.temperature += self.startempmin
 
         self.gasses = 0
         self.minerals = 0
