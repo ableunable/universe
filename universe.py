@@ -316,7 +316,7 @@ while running:
 							WHITE
 						))
 						texts.append(font_info.render(
-							f"Temperature: {planet.temperature}C",
+							f"Temperature: {planet.temperature}°C",
 							True,
 							WHITE
 						))
